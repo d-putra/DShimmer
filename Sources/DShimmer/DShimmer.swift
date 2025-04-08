@@ -52,7 +52,7 @@ public class DShimmer: UIView {
         didSet { layer.cornerRadius = cornerRadiusValue }
     }
 
-    override init(frame: CGRect) {
+    public override init(frame: CGRect) {
         super.init(frame: frame)
         setupShimmer()
     }
@@ -108,6 +108,12 @@ public struct DShimmerViewRepresentable: UIViewRepresentable {
     var baseColor: UIColor = UIColor.lightGray.withAlphaComponent(0.4)
     var shimmerColor: UIColor = UIColor.white.withAlphaComponent(0.6)
     var cornerRadius: CGFloat = 8
+
+    public init(baseColor: UIColor = UIColor.lightGray.withAlphaComponent(0.4), shimmerColor: UIColor = UIColor.white.withAlphaComponent(0.6), cornerRadius: CGFloat) {
+        self.baseColor = baseColor
+        self.shimmerColor = shimmerColor
+        self.cornerRadius = cornerRadius
+    }
 
     public func makeUIView(context: Context) -> DShimmer {
         let shimmer = DShimmer()

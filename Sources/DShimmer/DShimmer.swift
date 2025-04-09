@@ -7,50 +7,26 @@
 import SwiftUI
 import UIKit
 
-struct DShimmerModifier: ViewModifier {
-    var baseColor: UIColor
-    var shimmerColor: UIColor
-    var cornerRadius: CGFloat
-
-    func body(content: Content) -> some View {
-        content
-            .overlay(
-                DShimmerViewRepresentable(
-                    baseColor: baseColor,
-                    shimmerColor: shimmerColor,
-                    cornerRadius: cornerRadius
-                )
-            )
-            .mask(content)
-    }
-}
-
-extension View {
-    func dshimmer(baseColor: UIColor = UIColor.lightGray.withAlphaComponent(0.4),
-                  shimmerColor: UIColor = UIColor.white.withAlphaComponent(0.6),
-                  cornerRadius: CGFloat = 8
-
-    ) -> some View {
-        self.modifier(DShimmerModifier(baseColor: baseColor,
-                                       shimmerColor: shimmerColor,
-                                       cornerRadius: cornerRadius))
-    }
-}
-
 public class DShimmer: UIView {
     private let gradientLayer = CAGradientLayer()
+    private let keyName = "dshimmer"
 
     var baseColor: UIColor = UIColor.lightGray.withAlphaComponent(0.4) {
         didSet { backgroundColor = baseColor }
     }
 
-    var shimmerColor: UIColor = UIColor.white.withAlphaComponent(0.6) {
+    var shimmerColor: UIColor = UIColor.white.withAlphaComponent(0.4) {
         didSet { updateGradientColors() }
     }
 
     var cornerRadiusValue: CGFloat = 0 {
         didSet { layer.cornerRadius = cornerRadiusValue }
     }
+
+    var rotationDegree: CGFloat = 30 {
+        didSet { updateRotation() }
+    }
+
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -86,7 +62,9 @@ public class DShimmer: UIView {
 
     public override func layoutSubviews() {
         super.layoutSubviews()
-        gradientLayer.frame = bounds
+        let extra: CGFloat = bounds.width
+        gradientLayer.frame = bounds.insetBy(dx: -extra, dy: -extra)
+        gradientLayer.position = CGPoint(x: bounds.midX, y: bounds.midY)
     }
 
     func startAnimating() {
@@ -95,24 +73,32 @@ public class DShimmer: UIView {
         animation.toValue = [1, 1.5, 2]
         animation.duration = 1.2
         animation.repeatCount = .infinity
-        gradientLayer.add(animation, forKey: "shimmer")
+        gradientLayer.add(animation, forKey: keyName)
     }
 
     func stopAnimating() {
-        gradientLayer.removeAnimation(forKey: "shimmer")
+        gradientLayer.removeAnimation(forKey: keyName)
     }
+
+    private func updateRotation() {
+        let radians = rotationDegree * .pi / 180
+        gradientLayer.setAffineTransform(CGAffineTransform(rotationAngle: radians))
+    }
+
 }
 
 
-public struct DShimmerViewRepresentable: UIViewRepresentable {
+public struct DShimmerView: UIViewRepresentable {
     var baseColor: UIColor = UIColor.lightGray.withAlphaComponent(0.4)
     var shimmerColor: UIColor = UIColor.white.withAlphaComponent(0.6)
     var cornerRadius: CGFloat = 8
+    var rotationDegree: CGFloat = 0
 
-    public init(baseColor: UIColor = UIColor.lightGray.withAlphaComponent(0.4), shimmerColor: UIColor = UIColor.white.withAlphaComponent(0.6), cornerRadius: CGFloat) {
+    public init(baseColor: UIColor = UIColor.lightGray.withAlphaComponent(0.4), shimmerColor: UIColor = UIColor.white.withAlphaComponent(0.6), cornerRadius: CGFloat = 8, rotationDegree: CGFloat = 0) {
         self.baseColor = baseColor
         self.shimmerColor = shimmerColor
         self.cornerRadius = cornerRadius
+        self.rotationDegree = rotationDegree
     }
 
     public func makeUIView(context: Context) -> DShimmer {
@@ -120,6 +106,7 @@ public struct DShimmerViewRepresentable: UIViewRepresentable {
         shimmer.baseColor = baseColor
         shimmer.shimmerColor = shimmerColor
         shimmer.cornerRadiusValue = cornerRadius
+        shimmer.rotationDegree = rotationDegree
         return shimmer
     }
 
@@ -127,7 +114,43 @@ public struct DShimmerViewRepresentable: UIViewRepresentable {
         uiView.baseColor = baseColor
         uiView.shimmerColor = shimmerColor
         uiView.cornerRadiusValue = cornerRadius
+        uiView.rotationDegree = rotationDegree
+    }
+
+    public func baseColor(_ color: UIColor) -> DShimmerView {
+        DShimmerView(
+            baseColor: color,
+            shimmerColor: shimmerColor,
+            cornerRadius: cornerRadius,
+            rotationDegree: rotationDegree
+        )
+    }
+
+    public func shimmerColor(_ color: UIColor) -> DShimmerView {
+        DShimmerView(
+            baseColor: baseColor,
+            shimmerColor: color,
+            cornerRadius: cornerRadius,
+            rotationDegree: rotationDegree
+        )
+    }
+
+    public func cornerRadius(_ radius: CGFloat) -> DShimmerView {
+        DShimmerView(
+            baseColor: baseColor,
+            shimmerColor: shimmerColor,
+            cornerRadius: radius,
+            rotationDegree: rotationDegree
+        )
+    }
+
+    public func rotationDegree(_ radius: CGFloat) -> DShimmerView {
+        DShimmerView(
+            baseColor: baseColor,
+            shimmerColor: shimmerColor,
+            cornerRadius: cornerRadius,
+            rotationDegree: radius
+        )
     }
 }
-
 #endif

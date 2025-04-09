@@ -1,5 +1,5 @@
-![dshimmers](https://github.com/user-attachments/assets/0389f6de-30aa-4758-baf7-5984dbcd6b33)
 
+![shimmer](https://github.com/user-attachments/assets/428751f4-fe0b-45ef-acf9-75d1745034af)
 
 # DShimmer-Swift ✨
 

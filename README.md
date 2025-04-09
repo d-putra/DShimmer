@@ -1,3 +1,5 @@
+![DShimmer](https://github.com/user-attachments/assets/15fa421a-c9df-483b-87bd-3b21bdc1f68b)
+
 # DShimmer-Swift ✨
 
 `Shimmer` DShimmer? 🧐

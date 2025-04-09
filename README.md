@@ -12,9 +12,9 @@ A lightweight and customizable shimmer loading view for iOS — built with UIVie
 ## 🚀 Usage/Examples
 
 **SwiftUI**
-```swift
 
 ![shimmerview](https://github.com/user-attachments/assets/fbf1beee-d16d-4cec-9111-ea774ae40c49)
+```swift
 DShimmerView()
     .baseColor(.lightGray.withAlphaComponent(0.4))
     .shimmerColor(.white.withAlphaComponent(0.3))

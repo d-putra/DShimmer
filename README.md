@@ -23,12 +23,7 @@ DShimmerView()
     .frame(height: 120)
 ```
 
-```swift
-Button("Button With Background Shimmer") {}
-    .buttonStyle(.borderedProminent)
-    .dshimmer(baseColor: .clear, shimmerColor: .blue.withAlphaComponent(0.8))
-```
-
+![shimmer2](https://github.com/user-attachments/assets/663fbd42-6af8-4439-8f16-0e83cdcae04c)
 ```swift
 Button {} label: {
     Text("Button With Text Shimmer")

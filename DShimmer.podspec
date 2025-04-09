@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'DShimmer'
-    s.version          = '1.0.0'
+    s.version          = '1.0'
     s.summary          = 'DShimmer is a lightweight and customizable shimmer loading view for iOS — built with UIView and SwiftUI support.'
     s.homepage         = 'https://github.com/dioputrautama/DShimmer'
     s.license          = { :type => 'MIT', :file => 'LICENSE' }

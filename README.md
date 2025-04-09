@@ -43,11 +43,11 @@ Button {} label: {
 File > Swift Packages > Add Package Dependency
 - Search **DShimmer** or Add Package URL [https://github.com/dioputrautama/DShimmer.git](https://github.com/dioputrautama/DShimmer.git)
 
-- Select "Up to Next Major" with "8.0.0"
+- Select "Up to Next Major" with "1.0"
 
  **Cocoapods**
 
 Add this to your Podfile :
 ```swift
-pod 'DShimmer', '~> 8.0'
+pod 'DShimmer', '~> 1.0'
 ```

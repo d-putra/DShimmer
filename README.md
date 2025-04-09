@@ -1,4 +1,4 @@
-![DShimmer](https://github.com/user-attachments/assets/15fa421a-c9df-483b-87bd-3b21bdc1f68b)
+![DShimmer-removebg-preview](https://github.com/user-attachments/assets/05315ee5-bd42-4053-9025-b485d313bb9a)
 
 # DShimmer-Swift ✨
 

@@ -41,7 +41,7 @@ Button {} label: {
  **Swift Package Manager**
  
 File > Swift Packages > Add Package Dependency
-- Search **DShimmer** or Add Package URL [https://github.com/dioputrautama/DShimmer.git](https://github.com/dioputrautama/DShimmer.git)
+- Search **DShimmer** or Add Package URL [https://github.com/d-putra/DShimmer.git](https://github.com/d-putra/DShimmer.git)
 
 - Select "Up to Next Major" with "1.0"
 
@@ -49,5 +49,5 @@ File > Swift Packages > Add Package Dependency
 
 Add this to your Podfile :
 ```swift
-pod 'DShimmer', '~> 1.0'
+pod 'DShimmer', :git => 'https://github.com/d-putra/DShimmer.git', :tag => '1.0'
 ```

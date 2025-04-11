@@ -7,6 +7,36 @@
 import SwiftUI
 import UIKit
 
+public struct DShimmerModifier: ViewModifier {
+    var baseColor: UIColor
+    var shimmerColor: UIColor
+    var cornerRadius: CGFloat
+
+    public func body(content: Content) -> some View {
+        content
+            .overlay(
+                DShimmerView(
+                    baseColor: baseColor,
+                    shimmerColor: shimmerColor,
+                    cornerRadius: cornerRadius
+                )
+            )
+            .mask(content)
+    }
+}
+
+extension View {
+    func dshimmer(baseColor: UIColor = UIColor.lightGray.withAlphaComponent(0.4),
+                  shimmerColor: UIColor = UIColor.white.withAlphaComponent(0.6),
+                  cornerRadius: CGFloat = 8
+
+    ) -> some View {
+        self.modifier(DShimmerModifier(baseColor: baseColor,
+                                       shimmerColor: shimmerColor,
+                                       cornerRadius: cornerRadius))
+    }
+}
+
 public class DShimmer: UIView {
     private let gradientLayer = CAGradientLayer()
     private let keyName = "dshimmer"
@@ -62,6 +92,7 @@ public class DShimmer: UIView {
 
     public override func layoutSubviews() {
         super.layoutSubviews()
+        //        gradientLayer.frame = bounds
         let extra: CGFloat = bounds.width
         gradientLayer.frame = bounds.insetBy(dx: -extra, dy: -extra)
         gradientLayer.position = CGPoint(x: bounds.midX, y: bounds.midY)
@@ -117,6 +148,7 @@ public struct DShimmerView: UIViewRepresentable {
         uiView.rotationDegree = rotationDegree
     }
 
+    // MARK: - Chaining style
     public func baseColor(_ color: UIColor) -> DShimmerView {
         DShimmerView(
             baseColor: color,
@@ -153,4 +185,5 @@ public struct DShimmerView: UIViewRepresentable {
         )
     }
 }
+
 #endif

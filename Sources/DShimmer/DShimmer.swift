@@ -26,7 +26,7 @@ public struct DShimmerModifier: ViewModifier {
 }
 
 extension View {
-    func dshimmer(baseColor: UIColor = UIColor.lightGray.withAlphaComponent(0.4),
+    public func dshimmer(baseColor: UIColor = UIColor.lightGray.withAlphaComponent(0.4),
                   shimmerColor: UIColor = UIColor.white.withAlphaComponent(0.6),
                   cornerRadius: CGFloat = 8
 
